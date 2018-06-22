@@ -49,21 +49,37 @@ public class VendingMachine {
 
     /**
      * Method to select a product.
+     * @param productButton string representing the product's button
      */
     public void selectProduct(String productButton){
         Product selectedProduct = this.products.stream().filter(p -> p.button.equals(productButton)).findFirst().orElse(null);
+        String message = "";
+        if(this.insertedCoinsValue >= selectedProduct.price){
+            // There is at least enough money in the machine to purchase the selected product
+            this.display = "THANK YOU";
 
-        if(this.insertedCoinsValue >= selectedProduct.price) {
             // Dispense the product.
             selectedProduct.dispense();
 
             // Reset the insertedCoinsValue to 0
             this.insertedCoinsValue = 0;
-
-            // There is at least enough money in the machine to purchase the selected product
-            this.display = "THANK YOU";
-
         }
     }
 
+    /**
+     * Method to check the display text.
+     */
+    public String checkDisplay(){
+        String display;
+
+        // The display should only read "THANK YOU" the first time it is checked, then is reset.
+        if (this.display.equals("THANK YOU")) {
+            display = "THANK YOU";
+            this.display = "INSERT COIN";
+        } else {
+            display = this.display;
+        }
+
+        return display;
+    }
 }
