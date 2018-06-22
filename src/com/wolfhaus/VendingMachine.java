@@ -71,7 +71,7 @@ public class VendingMachine {
             this.insertedCoinsValue = 0;
         } else {
             // There is not enough money in the machine for the selected product
-            this.display = "PRICE " + currency.format(selectedProduct.price/100);
+            this.display = "PRICE " + currency.format((double)selectedProduct.price/100);
         }
 
     }
@@ -80,18 +80,22 @@ public class VendingMachine {
      * Method to check the display text.
      */
     public String checkDisplay(){
-        String display;
+        String display = this.display;
 
         if (this.display.equals("THANK YOU")) {
             // The display should only read "THANK YOU" on first check
-             display = this.display;
+             this.display = "INSERT COIN";
+        } else if (this.display.contains("PRICE")) {
+            // The display should only read "PRICE $x.xx on first check
+            this.display = currency.format((double)this.insertedCoinsValue/100);
         } else {
-            display = this.display;
-        }
-
-        // If the inserted coins is 0, reset to "INSERT COIN" otherwise show current coin value.
-        if(this.insertedCoinsValue == 0) {
-            this.display = "INSERT COIN";
+            if(this.insertedCoinsValue == 0) {
+                // If there are no coins in the machine, display "INSERT COINS"
+                this.display = "INSERT COIN";
+            } else {
+                // Display should read current value of inserted coins
+                this.display = currency.format((double)this.insertedCoinsValue/100);
+            }
         }
 
         return display;

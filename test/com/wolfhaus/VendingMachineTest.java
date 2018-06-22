@@ -75,8 +75,10 @@ public class VendingMachineTest {
         this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
         this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
 
+        // Select product A1
         this.vendingMachine.selectProduct("A1");
 
+        // Check the display the first time for "THANK YOU"
         assertEquals("THANK YOU", this.vendingMachine.checkDisplay());
     }
 
@@ -114,7 +116,10 @@ public class VendingMachineTest {
         this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
         this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
 
+        // Select product A1
         this.vendingMachine.selectProduct("A1");
+
+        // Check the insertedCoinsValue which should be 0
         assertEquals(0, this.vendingMachine.insertedCoinsValue);
     }
 
@@ -129,8 +134,31 @@ public class VendingMachineTest {
         this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
         this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
 
+        // Select product A1
         this.vendingMachine.selectProduct("A1");
 
+        // Check the display the first time for "PRICE $1.00"
         assertEquals("PRICE $1.00", this.vendingMachine.checkDisplay());
+    }
+
+    /**
+     * Test insertedCoinsValue after selecting product with
+     * exact money, the value should be 0.
+     */
+    @Test
+    public void afterSelectColaWithoutEnoughMoneyPriceTest() {
+        // Insert four quarters
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+
+        // Select product A1
+        this.vendingMachine.selectProduct("A1");
+
+        // Check the display the first time for "PRICE $1.00"
+        this.vendingMachine.checkDisplay();
+
+        // Check the display the second time for "$0.75"
+        assertEquals("$0.75", this.vendingMachine.checkDisplay());
     }
 }
