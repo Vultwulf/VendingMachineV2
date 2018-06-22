@@ -34,4 +34,13 @@ public class VendingMachineTest {
         Coin insertedCoin = new Coin(18, 2);
         assertEquals(AcceptedCoins.dime.value, insertedCoin.identify().value);
     }
+
+    /**
+     * Test to identify a coin as a quarter with the value of 25
+     */
+    @Test
+    public void identifyCoinQuarterValueTest() {
+        Coin insertedCoin = new Coin(25, 6);
+        assertEquals(AcceptedCoins.quarter.value, insertedCoin.identify().value);
+    }
 }

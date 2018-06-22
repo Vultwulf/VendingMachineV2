@@ -38,4 +38,9 @@ public class AcceptedCoins {
      *  Contains the attributes of a known dime object.
      */
     protected static Coin dime = new Coin(Name.DIME, 10, 18, 2);
+
+    /**
+     *  Contains the attributes of a known quarter object
+     */
+    protected static Coin quarter = new Coin(Name.QUARTER, 25, 25, 6);
 }

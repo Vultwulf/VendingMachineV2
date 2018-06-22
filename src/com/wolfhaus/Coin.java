@@ -66,6 +66,10 @@ public class Coin {
             // A dime has been identified, apply the nickel name and value.
             this.name = AcceptedCoins.dime.name;
             this.value = AcceptedCoins.dime.value;
+        } else if (this.size == AcceptedCoins.quarter.size && this.weight == AcceptedCoins.quarter.weight) {
+            // A quarter has been identified, apply the quarter name and value.
+            this.name = AcceptedCoins.quarter.name;
+            this.value = AcceptedCoins.quarter.value;
         }
 
         return this;
