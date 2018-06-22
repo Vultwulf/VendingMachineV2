@@ -1,6 +1,6 @@
 package com.wolfhaus;
 /**
- * The AcceptedCoin class will handle will handle all accepted coins
+ * The IdentifiedCoins class will handle will handle all accepted coins
  * in the Vending Machine program.
  */
 public class IdentifiedCoins {
