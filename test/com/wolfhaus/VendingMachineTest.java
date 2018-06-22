@@ -78,5 +78,20 @@ public class VendingMachineTest {
         assertEquals("THANK YOU", this.vendingMachine.display);
     }
 
+    /**
+     * Test insertedCoinsValue after selecting product with
+     * exact money, the value should be 0.
+     */
+    @Test
+    public void afterSelectColaWithExactMoneyValueTest() {
+        // Insert four quarters
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+
+        this.vendingMachine.selectProduct("A1");
+        assertEquals(0, this.vendingMachine.insertedCoinsValue);
+    }
 
 }

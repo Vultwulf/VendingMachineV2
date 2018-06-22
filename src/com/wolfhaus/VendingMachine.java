@@ -54,8 +54,15 @@ public class VendingMachine {
         Product selectedProduct = this.products.stream().filter(p -> p.button.equals(productButton)).findFirst().orElse(null);
 
         if(this.insertedCoinsValue >= selectedProduct.price) {
+            // Dispense the product.
+            selectedProduct.dispense();
+
+            // Reset the insertedCoinsValue to 0
+            this.insertedCoinsValue = 0;
+
             // There is at least enough money in the machine to purchase the selected product
             this.display = "THANK YOU";
+
         }
     }
 

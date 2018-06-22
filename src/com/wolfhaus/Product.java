@@ -39,4 +39,12 @@ public class Product {
         this.button = productButton;
         this.count = productCount;
     }
+
+    /**
+     * The method to dispense a product from the vending machine.
+     */
+    public void dispense()
+    {
+
+    }
 }
