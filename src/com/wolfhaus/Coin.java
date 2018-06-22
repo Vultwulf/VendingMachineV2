@@ -13,7 +13,7 @@ public class Coin {
     /**
      * The name of a coin.
      */
-    protected AcceptedCoins.Name name;
+    protected IdentifiedCoins.Name name;
 
     /**
      * The value of a coin in cents.
@@ -47,7 +47,7 @@ public class Coin {
      * @param coinSize size of the coin in millimeters
      * @param coinWeight weight of the coin in grams
      */
-    public Coin(AcceptedCoins.Name coinName, int coinValue, int coinSize, int coinWeight) {
+    public Coin(IdentifiedCoins.Name coinName, int coinValue, int coinSize, int coinWeight) {
         this.name = coinName;
         this.value = coinValue;
         this.size = coinSize;
@@ -58,18 +58,23 @@ public class Coin {
      * The method to identify a coin, and apply the name and value to the object.
      */
     public Coin identify() {
-        if (this.size == AcceptedCoins.nickel.size && this.weight == AcceptedCoins.nickel.weight) {
+        if (this.size == IdentifiedCoins.nickel.size && this.weight == IdentifiedCoins.nickel.weight) {
             // A nickel has been identified, apply the nickel name and value.
-            this.name = AcceptedCoins.nickel.name;
-            this.value = AcceptedCoins.nickel.value;
-        } else if (this.size == AcceptedCoins.dime.size && this.weight == AcceptedCoins.dime.weight) {
+            this.name = IdentifiedCoins.nickel.name;
+            this.value = IdentifiedCoins.nickel.value;
+        } else if (this.size == IdentifiedCoins.dime.size && this.weight == IdentifiedCoins.dime.weight) {
             // A dime has been identified, apply the nickel name and value.
-            this.name = AcceptedCoins.dime.name;
-            this.value = AcceptedCoins.dime.value;
-        } else if (this.size == AcceptedCoins.quarter.size && this.weight == AcceptedCoins.quarter.weight) {
+            this.name = IdentifiedCoins.dime.name;
+            this.value = IdentifiedCoins.dime.value;
+        } else if (this.size == IdentifiedCoins.quarter.size && this.weight == IdentifiedCoins.quarter.weight) {
             // A quarter has been identified, apply the quarter name and value.
-            this.name = AcceptedCoins.quarter.name;
-            this.value = AcceptedCoins.quarter.value;
+            this.name = IdentifiedCoins.quarter.name;
+            this.value = IdentifiedCoins.quarter.value;
+        } else
+        {
+            // This is an unidentified coin for which this vending machine recognizes no value
+            this.name = IdentifiedCoins.unknown.name;
+            this.value = IdentifiedCoins.unknown.value;
         }
 
         return this;

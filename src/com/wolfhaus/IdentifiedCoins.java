@@ -3,7 +3,7 @@ package com.wolfhaus;
  * The AcceptedCoin class will handle will handle all accepted coins
  * in the Vending Machine program.
  */
-public class AcceptedCoins {
+public class IdentifiedCoins {
     /**
      *  Contains Names of coins, and UNKNOWN placeholder.
      */
@@ -43,4 +43,9 @@ public class AcceptedCoins {
      *  Contains the attributes of a known quarter object
      */
     protected static Coin quarter = new Coin(Name.QUARTER, 25, 25, 6);
+
+    /**
+     *  Contains the attributes of an unknown coin object
+     */
+    protected static Coin unknown = new Coin(Name.UNKNOWN, 0, 0, 0);
 }

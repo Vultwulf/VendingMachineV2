@@ -1,6 +1,5 @@
 package com.wolfhaus;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -18,29 +17,38 @@ import static org.junit.Assert.assertEquals;
 public class VendingMachineTest {
 
     /**
-     * Test to identify a coin as a nickel with the value of 5
+     * Test to identify a coin as a nickel with the associated value (5)
      */
     @Test
     public void identifyCoinNickelValueTest() {
         Coin insertedCoin = new Coin(21, 5);
-        assertEquals(AcceptedCoins.nickel.value, insertedCoin.identify().value);
+        assertEquals(IdentifiedCoins.nickel.value, insertedCoin.identify().value);
     }
 
     /**
-     * Test to identify a coin as a dime with the value of 10
+     * Test to identify a coin as a dime with the associated value (10)
      */
     @Test
     public void identifyCoinDimeValueTest() {
         Coin insertedCoin = new Coin(18, 2);
-        assertEquals(AcceptedCoins.dime.value, insertedCoin.identify().value);
+        assertEquals(IdentifiedCoins.dime.value, insertedCoin.identify().value);
     }
 
     /**
-     * Test to identify a coin as a quarter with the value of 25
+     * Test to identify a coin as a quarter with the associated value (25)
      */
     @Test
     public void identifyCoinQuarterValueTest() {
         Coin insertedCoin = new Coin(25, 6);
-        assertEquals(AcceptedCoins.quarter.value, insertedCoin.identify().value);
+        assertEquals(IdentifiedCoins.quarter.value, insertedCoin.identify().value);
+    }
+
+    /**
+     * Test to identify a coin as a unknown with the associated value (0)
+     */
+    @Test
+    public void identifyCoinUnknownValueTest() {
+        Coin insertedCoin = new Coin(66, 12);
+        assertEquals(IdentifiedCoins.unknown.value, insertedCoin.identify().value);
     }
 }
