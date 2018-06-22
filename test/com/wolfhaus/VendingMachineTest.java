@@ -161,4 +161,23 @@ public class VendingMachineTest {
         // Check the display the second time for "$0.75"
         assertEquals("$0.75", this.vendingMachine.checkDisplay());
     }
+
+    /**
+     * Test insertedCoinsValue after selecting product with
+     * exact money, the value should be 0.
+     */
+    @Test
+    public void selectColaWithExtraMoneyReturnCoinTest() {
+        // Insert two nickels, two dimes, three quarters
+        this.vendingMachine.acceptCoin(IdentifiedCoins.nickel);
+        this.vendingMachine.acceptCoin(IdentifiedCoins.nickel);
+        this.vendingMachine.acceptCoin(IdentifiedCoins.dime);
+        this.vendingMachine.acceptCoin(IdentifiedCoins.dime);
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+
+        // Select product A1
+        assertEquals(IdentifiedCoins.Name.NICKEL, this.vendingMachine.selectProduct("A1").get(0).name);
+    }
 }
