@@ -1,5 +1,6 @@
 package com.wolfhaus;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -22,6 +23,15 @@ public class VendingMachineTest {
     @Test
     public void identifyCoinNickelValueTest() {
         Coin insertedCoin = new Coin(21, 5);
-        assertEquals(5, insertedCoin.identify().value);
+        assertEquals(AcceptedCoins.nickel.value, insertedCoin.identify().value);
+    }
+
+    /**
+     * Test to identify a coin as a dime with the value of 10
+     */
+    @Test
+    public void identifyCoinDimeValueTest() {
+        Coin insertedCoin = new Coin(18, 2);
+        assertEquals(AcceptedCoins.dime.value, insertedCoin.identify().value);
     }
 }

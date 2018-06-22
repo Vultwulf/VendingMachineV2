@@ -5,59 +5,67 @@ package com.wolfhaus;
  * relating to identifying and passing information relating
  * to coins inserted into the Vending Machine.
  *
- *
  * @author  Scott Wolfenbarger
  * @version 1.0
  * @since   2018-06-22
  */
 public class Coin {
     /**
-     *  Contains Names of coins, and UNKNOWN placeholder
+     * The name of a coin.
      */
-    public enum Name {
-        NICKEL, DIME, QUARTER, UNKNOWN
-    }
+    protected AcceptedCoins.Name name;
 
     /**
-     * The name of a coin
-     */
-    protected Name name;
-
-    /**
-     * The value of a coin in cents
+     * The value of a coin in cents.
      */
     protected int value;
 
     /**
-     * The size of a coin in millimeters
+     * The size of a coin in millimeters.
      */
     protected int size;
 
     /**
-     * The weight of a coin in grams
+     * The weight of a coin in grams.
      */
     protected int weight;
 
     /**
-     * Constructor for VendingMachine
+     * Constructor for VendingMachine.
      * @param coinSize size of the coin in millimeters
      * @param coinWeight weight of the coin in grams
      */
-    public Coin(int coinSize, int coinWeight)
-    {
+    public Coin(int coinSize, int coinWeight) {
         this.size = coinSize;
         this.weight = coinWeight;
     }
 
     /**
-     * The method to identify a coin, and apply the name and value to the object
+     * Constructor for VendingMachine.
+     * @param coinName name of the coin
+     * @param coinValue value of the coin in cents
+     * @param coinSize size of the coin in millimeters
+     * @param coinWeight weight of the coin in grams
+     */
+    public Coin(AcceptedCoins.Name coinName, int coinValue, int coinSize, int coinWeight) {
+        this.name = coinName;
+        this.value = coinValue;
+        this.size = coinSize;
+        this.weight = coinWeight;
+    }
+
+    /**
+     * The method to identify a coin, and apply the name and value to the object.
      */
     public Coin identify() {
-        if (this.size == 21 && this.weight == 5)
-        {
-            // A nickel has size of 21, weight of 5, with the value of 5
-            this.name = Name.NICKEL;
-            this.value = 5;
+        if (this.size == AcceptedCoins.nickel.size && this.weight == AcceptedCoins.nickel.weight) {
+            // A nickel has been identified, apply the nickel name and value.
+            this.name = AcceptedCoins.nickel.name;
+            this.value = AcceptedCoins.nickel.value;
+        } else if (this.size == AcceptedCoins.dime.size && this.weight == AcceptedCoins.dime.weight) {
+            // A dime has been identified, apply the nickel name and value.
+            this.name = AcceptedCoins.dime.name;
+            this.value = AcceptedCoins.dime.value;
         }
 
         return this;

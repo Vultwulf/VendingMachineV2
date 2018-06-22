@@ -14,7 +14,7 @@ package com.wolfhaus;
 public class VendingMachine {
 
     /**
-     * Constructor for VendingMachine
+     * Constructor for VendingMachine.
      */
     public VendingMachine(){
 
