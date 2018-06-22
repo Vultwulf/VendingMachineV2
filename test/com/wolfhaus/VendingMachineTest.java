@@ -117,4 +117,20 @@ public class VendingMachineTest {
         this.vendingMachine.selectProduct("A1");
         assertEquals(0, this.vendingMachine.insertedCoinsValue);
     }
+
+    /**
+     * Test insertedCoinsValue after selecting product without
+     * enough money, the display should be selected product price.
+     */
+    @Test
+    public void selectColaWithoutEnoughMoneyPriceTest() {
+        // Insert three quarters
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+
+        this.vendingMachine.selectProduct("A1");
+
+        assertEquals("PRICE $1.00", this.vendingMachine.checkDisplay());
+    }
 }

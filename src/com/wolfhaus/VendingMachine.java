@@ -1,5 +1,6 @@
 package com.wolfhaus;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 /**
@@ -20,6 +21,11 @@ public class VendingMachine {
     protected ArrayList<Product> products = new ArrayList();
 
     /**
+     * The NumberFormat object
+     */
+    NumberFormat currency = NumberFormat.getCurrencyInstance();
+
+    /**
      * The total value of currency inserted into in the vending machine.
      */
     protected int insertedCoinsValue = 0;
@@ -27,7 +33,7 @@ public class VendingMachine {
     /**
      * The current display text on the vending machine.
      */
-    protected String display;
+    protected String display = "INSERT COIN";
 
     /**
      * Constructor for VendingMachine.
@@ -63,7 +69,11 @@ public class VendingMachine {
 
             // Reset the insertedCoinsValue to 0
             this.insertedCoinsValue = 0;
+        } else {
+            // There is not enough money in the machine for the selected product
+            this.display = "PRICE " + currency.format(selectedProduct.price/100);
         }
+
     }
 
     /**
@@ -72,12 +82,16 @@ public class VendingMachine {
     public String checkDisplay(){
         String display;
 
-        // The display should only read "THANK YOU" the first time it is checked, then is reset.
         if (this.display.equals("THANK YOU")) {
-            display = "THANK YOU";
-            this.display = "INSERT COIN";
+            // The display should only read "THANK YOU" on first check
+             display = this.display;
         } else {
             display = this.display;
+        }
+
+        // If the inserted coins is 0, reset to "INSERT COIN" otherwise show current coin value.
+        if(this.insertedCoinsValue == 0) {
+            this.display = "INSERT COIN";
         }
 
         return display;
