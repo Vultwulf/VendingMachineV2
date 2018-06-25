@@ -95,26 +95,20 @@ public class VendingMachine {
     }
 
     /**
-     * Method to check the display text.
+     * Method to check the current display text.
      * @return String of the display text.
      */
     public String checkDisplay(){
+        // Return the current display buffer when reading the display
         String display = this.display;
 
-        if (this.display.equals("THANK YOU")) {
-            // The display should only read "THANK YOU" on first check
-             this.display = "INSERT COIN";
-        } else if (this.display.contains("PRICE")) {
-            // The display should only read "PRICE $x.xx on first check
-            this.display = currency.format((double)this.insertedCoinsValue/100);
+        // Update the display buffer for the next display check.
+        if(this.insertedCoinsValue == 0) {
+            // If there are no coins in the machine, display "INSERT COINS"
+            this.display = "INSERT COIN";
         } else {
-            if(this.insertedCoinsValue == 0) {
-                // If there are no coins in the machine, display "INSERT COINS"
-                this.display = "INSERT COIN";
-            } else {
-                // Display should read current value of inserted coins
-                this.display = currency.format((double)this.insertedCoinsValue/100);
-            }
+            // Display should read current value of inserted coins
+            this.display = currency.format((double)this.insertedCoinsValue/100);
         }
 
         return display;
