@@ -192,6 +192,17 @@ public class VendingMachineTest {
         assertEquals(1, this.vendingMachine.returnCoins().size());
     }
 
+    /** Test returnCoins size test after inserting one dime
+     */
+    @Test
+    public void returnCoinsSizeOneDimeTest() {
+        // Insert one quarter
+        this.vendingMachine.acceptCoin(IdentifiedCoins.dime);
+
+        // Return Coins
+        assertEquals(1, this.vendingMachine.returnCoins().size());
+    }
+
     /** Test returnCoins value test after inserting one quarter
      */
     @Test
