@@ -181,6 +181,28 @@ public class VendingMachineTest {
         assertEquals(IdentifiedCoins.Name.NICKEL, this.vendingMachine.selectProduct("A1").get(0).name);
     }
 
+    /** Test returnCoins size test after inserting one nickel
+     */
+    @Test
+    public void returnCoinsSizeOneNickelTest() {
+        // Insert one quarter
+        this.vendingMachine.acceptCoin(IdentifiedCoins.nickel);
+
+        // Return Coins
+        assertEquals(1, this.vendingMachine.returnCoins().size());
+    }
+
+    /** Test returnCoins value test after inserting one quarter
+     */
+    @Test
+    public void returnCoinsValueOneQuarterTest() {
+        // Insert one quarter
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+
+        // Return Coins
+        assertEquals(25, this.vendingMachine.returnCoins().get(0).value);
+    }
+
     /** Test returnCoins size test after inserting one quarter
      */
     @Test
@@ -192,14 +214,5 @@ public class VendingMachineTest {
         assertEquals(1, this.vendingMachine.returnCoins().size());
     }
 
-    /** Test returnCoins size test after inserting one quarter
-     */
-    @Test
-    public void returnCoinsValueOneQuarterTest() {
-        // Insert one quarter
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
 
-        // Return Coins
-        assertEquals(25, this.vendingMachine.returnCoins().get(0).value);
-    }
 }
