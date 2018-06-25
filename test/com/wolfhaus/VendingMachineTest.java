@@ -225,6 +225,17 @@ public class VendingMachineTest {
         assertEquals(5, this.vendingMachine.returnCoins().get(0).value);
     }
 
+    /** Test returnCoins value test after inserting one nickel
+     */
+    @Test
+    public void returnCoinsValueOneDimeTest() {
+        // Insert one quarter
+        this.vendingMachine.acceptCoin(IdentifiedCoins.dime);
+
+        // Return Coins
+        assertEquals(10, this.vendingMachine.returnCoins().get(0).value);
+    }
+
     /** Test returnCoins value test after inserting one quarter
      */
     @Test
