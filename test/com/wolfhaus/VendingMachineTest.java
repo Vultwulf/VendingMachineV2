@@ -180,4 +180,15 @@ public class VendingMachineTest {
         // Select product A1
         assertEquals(IdentifiedCoins.Name.NICKEL, this.vendingMachine.selectProduct("A1").get(0).name);
     }
+
+    /** Test returnCoins length test after inserting one quarter
+     */
+    @Test
+    public void returnCoinsSizeOneQuarterTest() {
+        // Insert one quarter
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+
+        // Return Coins
+        assertEquals(1, this.vendingMachine.returnCoins().size());
+    }
 }
