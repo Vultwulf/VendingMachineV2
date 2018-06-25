@@ -181,6 +181,27 @@ public class VendingMachineTest {
         assertEquals(IdentifiedCoins.Name.NICKEL, this.vendingMachine.selectProduct("A1").get(0).name);
     }
 
+    /**
+     * Test trying to purchase a Cola when the inventory for Cola is 0,
+     * and there is no more money in the machine.
+     */
+    @Test
+    public void selectColaSoldOutWithoutMoneyTest() {
+        // Insert four quarters
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+
+        // Select product A1 (cola)
+        this.vendingMachine.selectProduct("A1");
+
+        // Select product A1 (cola) after it's been sold
+        this.vendingMachine.selectProduct("A1");
+
+        assertEquals("SOLD OUT", this.vendingMachine.checkDisplay());
+    }
+
     /** Test returnCoins size test after inserting one nickel
      */
     @Test

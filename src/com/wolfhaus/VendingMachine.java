@@ -66,7 +66,7 @@ public class VendingMachine {
         // Find the product
         Product selectedProduct = this.products.stream().filter(p -> p.button.equals(productButton)).findFirst().orElse(null);
 
-        if(selectedProduct != null) {
+        if(selectedProduct != null && selectedProduct.count > 0) {
             // Determine if this product can be purchased
             if (this.insertedCoinsValue >= selectedProduct.price) {
                 // There is at least enough money in the machine to purchase the selected product
@@ -86,6 +86,9 @@ public class VendingMachine {
                 // There is not enough money in the machine for the selected product
                 this.display = "PRICE " + currency.format((double) selectedProduct.price / 100);
             }
+        } else {
+            // The select product count is 0, it is sold out
+            this.display = "SOLD OUT";
         }
 
         return returnedCoins;

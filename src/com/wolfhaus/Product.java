@@ -45,6 +45,9 @@ public class Product {
      */
     public void dispense()
     {
-
+        // If there is product available, reduce the count by one.
+        if(this.count > 0) {
+            this.count --;
+        }
     }
 }
