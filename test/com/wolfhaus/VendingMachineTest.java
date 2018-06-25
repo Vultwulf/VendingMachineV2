@@ -256,6 +256,37 @@ public class VendingMachineTest {
         assertEquals("SOLD OUT", this.vendingMachine.checkDisplay());
     }
 
+    /**
+     * Test trying to purchase a Cola when the inventory for Cola is 0,
+     * and there is enough money added in the machine, the display should read
+     * "SOLD OUT" on the first display check.
+     */
+    @Test
+    public void selectColaSoldOutWithMoneyDisplayTest() {
+        // Insert four quarters
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+
+        // Select product A1 (cola)
+        this.vendingMachine.selectProduct("A1");
+
+        // Insert four quarters
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+
+        // Select product A1 (cola) after it's been sold
+        this.vendingMachine.selectProduct("A1");
+
+        // Check the display the first time
+        this.vendingMachine.checkDisplay();
+
+        assertEquals("$1.00", this.vendingMachine.checkDisplay());
+    }
+
     /** Test returnCoins size test after inserting one nickel
      */
     @Test
