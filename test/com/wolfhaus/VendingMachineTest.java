@@ -259,4 +259,22 @@ public class VendingMachineTest {
         // Return Coins
         assertEquals(25, this.vendingMachine.returnCoins().get(0).value);
     }
+
+    /** Test returnCoins value test after inserting one nickel, dime, quarter
+     */
+    @Test
+    public void returnCoinsValueOneNickelDimeQuarterTest() {
+        // Insert one nickel, dime, quarter
+        this.vendingMachine.acceptCoin(IdentifiedCoins.nickel);
+        this.vendingMachine.acceptCoin(IdentifiedCoins.dime);
+        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+
+        // Add together total coins value
+        int coinValue = 0;
+        for (Coin coin : this.vendingMachine.returnCoins()) {
+            coinValue += coin.value;
+        }
+
+        assertEquals(40, coinValue);
+    }
 }
