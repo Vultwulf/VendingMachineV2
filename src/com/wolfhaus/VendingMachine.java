@@ -18,7 +18,7 @@ public class VendingMachine {
     /**
      * The list of products in the vending machine.
      */
-    protected ArrayList<Product> products = new ArrayList();
+    protected ArrayList<Product> products = new ArrayList<>();
 
     /**
      * The NumberFormat object
@@ -47,6 +47,7 @@ public class VendingMachine {
 
     /**
      * Method to accept a coin.
+     * @param coin to be accepted into the vending machine.
      */
     public void acceptCoin(Coin coin){
         Coin identifiedCoin = coin.identify();
@@ -55,7 +56,8 @@ public class VendingMachine {
 
     /**
      * Method to select a product.
-     * @param productButton string representing the product's button
+     * @param productButton string representing the product's button.
+     * @return ArrayList of Coin to be returned to the user.
      */
     public ArrayList<Coin> selectProduct(String productButton){
         // Coins to return
@@ -64,24 +66,26 @@ public class VendingMachine {
         // Find the product
         Product selectedProduct = this.products.stream().filter(p -> p.button.equals(productButton)).findFirst().orElse(null);
 
-        // Determine if this product can be purchased
-        if(this.insertedCoinsValue >= selectedProduct.price){
-            // There is at least enough money in the machine to purchase the selected product
-            this.display = "THANK YOU";
+        if(selectedProduct != null) {
+            // Determine if this product can be purchased
+            if (this.insertedCoinsValue >= selectedProduct.price) {
+                // There is at least enough money in the machine to purchase the selected product
+                this.display = "THANK YOU";
 
-            // Dispense the product.
-            selectedProduct.dispense();
+                // Dispense the product.
+                selectedProduct.dispense();
 
-            // Subtract used coins from the insertedCoinsValue
-            this.insertedCoinsValue -= selectedProduct.price;
+                // Subtract used coins from the insertedCoinsValue
+                this.insertedCoinsValue -= selectedProduct.price;
 
-            // If there is any extra money, return it to the user
-            if(this.insertedCoinsValue > 0) {
-                returnedCoins = this.returnCoins();
+                // If there is any extra money, return it to the user
+                if (this.insertedCoinsValue > 0) {
+                    returnedCoins = this.returnCoins();
+                }
+            } else {
+                // There is not enough money in the machine for the selected product
+                this.display = "PRICE " + currency.format((double) selectedProduct.price / 100);
             }
-        } else {
-            // There is not enough money in the machine for the selected product
-            this.display = "PRICE " + currency.format((double)selectedProduct.price/100);
         }
 
         return returnedCoins;
@@ -89,6 +93,7 @@ public class VendingMachine {
 
     /**
      * Method to check the display text.
+     * @return String of the display text.
      */
     public String checkDisplay(){
         String display = this.display;
@@ -114,23 +119,30 @@ public class VendingMachine {
 
     /**
      * Method to return coins to the user.
+     * @return ArrayList of Coin to be returned to the user.
      */
     public ArrayList<Coin> returnCoins(){
         // Coins to return
         ArrayList<Coin> returnedCoins = new ArrayList<>();
 
-        // Figure out what coins will be returned
+        // Determine what coins will be returned
         while(this.insertedCoinsValue > 0)
         {
-            if(this.insertedCoinsValue >= 25) {
+            if(this.insertedCoinsValue >= IdentifiedCoins.quarter.value) {
+                // Inserted coin value is above or equal 25, return a quarter
                 returnedCoins.add(IdentifiedCoins.quarter);
                 this.insertedCoinsValue -= IdentifiedCoins.quarter.value;
-            } else if(this.insertedCoinsValue >= 10) {
+            } else if(this.insertedCoinsValue >= IdentifiedCoins.dime.value) {
+                // Inserted coin value is above or equal 10, return a dime
                 returnedCoins.add(IdentifiedCoins.dime);
                 this.insertedCoinsValue -= IdentifiedCoins.dime.value;
-            } else {
+            } else if(this.insertedCoinsValue >= IdentifiedCoins.nickel.value) {
+                // Inserted coin value is above or equal 5, return a dime
                 returnedCoins.add(IdentifiedCoins.nickel);
                 this.insertedCoinsValue -= IdentifiedCoins.nickel.value;
+            } else {
+                // Exception placeholder - error state, the inserted coins should never be below 5
+                this.insertedCoinsValue = 0;
             }
         }
 
