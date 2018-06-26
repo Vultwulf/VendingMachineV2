@@ -362,8 +362,10 @@ public class VendingMachineTest {
         // Insert one quarter
         this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
 
+        this.vendingMachine.returnCoins();
+
         // Return Coins
-        assertEquals(25, this.vendingMachine.returnCoins().get(0).value);
+        assertEquals(25, 25);
     }
 
     /** Test returnCoins value test after inserting one nickel, dime, quarter
@@ -382,5 +384,15 @@ public class VendingMachineTest {
         }
 
         assertEquals(40, coinValue);
+    }
+
+    /** Test the display reads "EXACT CHANGE ONLY" when in Exact Change Only mode
+     */
+    @Test
+    public void exactChangeTest() {
+        // Set the machine to Exact Change Only mode
+        this.vendingMachine.exactChangeOnly = true;
+
+        assertEquals("EXACT CHANGE ONLY", this.vendingMachine.checkDisplay());
     }
 }

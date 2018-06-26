@@ -33,7 +33,12 @@ public class VendingMachine {
     /**
      * The current display text on the vending machine.
      */
-    protected String display = "INSERT COIN";
+    protected String display;
+
+    /**
+     * The current display text on the vending machine.
+     */
+    protected boolean exactChangeOnly = false;
 
     /**
      * Constructor for VendingMachine.
@@ -72,7 +77,7 @@ public class VendingMachine {
                 // There is at least enough money in the machine to purchase the selected product
                 this.display = "THANK YOU";
 
-                // Dispense the product.
+                // Dispense the product
                 selectedProduct.dispense();
 
                 // Subtract used coins from the insertedCoinsValue
@@ -104,11 +109,22 @@ public class VendingMachine {
 
         // Update the display buffer for the next display check.
         if(this.insertedCoinsValue == 0) {
-            // If there are no coins in the machine, display "INSERT COINS"
-            this.display = "INSERT COIN";
+            if(this.exactChangeOnly == true) {
+                // If there are no coins in the machine and exact change mode is on, display "EXACT CHANGE ONLY"
+                this.display = "EXACT CHANGE ONLY";
+            } else {
+                // If there are no coins in the machine, display "INSERT COINS"
+                this.display = "INSERT COIN";
+            }
         } else {
             // Display should read current value of inserted coins
             this.display = currency.format((double)this.insertedCoinsValue/100);
+        }
+
+        // If the returning display is in a null state, apply the most current display
+        if(display == null)
+        {
+            display = this.display;
         }
 
         return display;
@@ -137,9 +153,6 @@ public class VendingMachine {
                 // Inserted coin value is above or equal 5, return a dime
                 returnedCoins.add(IdentifiedCoins.nickel);
                 this.insertedCoinsValue -= IdentifiedCoins.nickel.value;
-            } else {
-                // Exception placeholder - error state, the inserted coins should never be below 5
-                this.insertedCoinsValue = 0;
             }
         }
 
