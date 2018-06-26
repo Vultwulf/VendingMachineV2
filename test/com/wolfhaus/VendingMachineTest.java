@@ -75,7 +75,7 @@ public class VendingMachineTest {
         this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
         this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
 
-        // Select product A1
+        // Select product A1 (cola)
         this.vendingMachine.selectProduct("A1");
 
         // Check the display the first time for "THANK YOU"
@@ -94,7 +94,7 @@ public class VendingMachineTest {
         this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
         this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
 
-        // Select product A1
+        // Select product A1 (cola)
         this.vendingMachine.selectProduct("A1");
 
         // Check the display the first time for "THANK YOU"
@@ -116,7 +116,7 @@ public class VendingMachineTest {
         this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
         this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
 
-        // Select product A1
+        // Select product A1 (cola)
         this.vendingMachine.selectProduct("A1");
 
         // Check the insertedCoinsValue which should be 0
@@ -134,7 +134,7 @@ public class VendingMachineTest {
         this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
         this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
 
-        // Select product A1
+        // Select product A1 (cola)
         this.vendingMachine.selectProduct("A1");
 
         // Check the display the first time for "PRICE $1.00"
@@ -152,7 +152,7 @@ public class VendingMachineTest {
         this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
         this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
 
-        // Select product A1
+        // Select product A1 (cola)
         this.vendingMachine.selectProduct("A1");
 
         // Check the display the first time for "PRICE $1.00"
@@ -177,7 +177,7 @@ public class VendingMachineTest {
         this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
         this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
 
-        // Select product A1
+        // Select product A1 (cola)
         assertEquals(IdentifiedCoins.Name.NICKEL, this.vendingMachine.selectProduct("A1").get(0).name);
     }
 
@@ -302,7 +302,7 @@ public class VendingMachineTest {
      */
     @Test
     public void returnCoinsSizeOneDimeTest() {
-        // Insert one quarter
+        // Insert one dime
         this.vendingMachine.acceptCoin(IdentifiedCoins.dime);
 
         // Return Coins
@@ -362,10 +362,8 @@ public class VendingMachineTest {
         // Insert one quarter
         this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
 
-        this.vendingMachine.returnCoins();
-
         // Return Coins
-        assertEquals(25, 25);
+        assertEquals(25, this.vendingMachine.returnCoins().get(0).value);
     }
 
     /** Test returnCoins value test after inserting one nickel, dime, quarter
@@ -377,8 +375,9 @@ public class VendingMachineTest {
         this.vendingMachine.acceptCoin(IdentifiedCoins.dime);
         this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
 
-        // Add together total coins value
         int coinValue = 0;
+
+        // Add together total coins value
         for (Coin coin : this.vendingMachine.returnCoins()) {
             coinValue += coin.value;
         }
