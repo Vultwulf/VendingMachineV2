@@ -25,13 +25,14 @@ public class VendingMachineTest {
     public void setUp() {
         // Instantiate the VendingMachine object
         this.vendingMachine = new VendingMachine();
+        this.vendingMachine.bank.setBankCoins(10,10,10);
     }
 
     /**
      * Test to identify a coin as a nickel with the associated value (5).
      */
     @Test
-    public void identifyCoinNickelValueTest() {
+    public void insertCoinNickelValueTest() {
         Coin insertedCoin = new Coin(21, 5);
         assertEquals(5, insertedCoin.identify().value);
     }
@@ -40,7 +41,7 @@ public class VendingMachineTest {
      * Test to identify a coin as a dime with the associated value (10).
      */
     @Test
-    public void identifyCoinDimeValueTest() {
+    public void insertCoinDimeValueTest() {
         Coin insertedCoin = new Coin(18, 2);
         assertEquals(10, insertedCoin.identify().value);
     }
@@ -49,7 +50,7 @@ public class VendingMachineTest {
      * Test to identify a coin as a quarter with the associated value (25).
      */
     @Test
-    public void identifyCoinQuarterValueTest() {
+    public void insertCoinQuarterValueTest() {
         Coin insertedCoin = new Coin(25, 6);
         assertEquals(25, insertedCoin.identify().value);
     }
@@ -58,9 +59,20 @@ public class VendingMachineTest {
      * Test to identify a coin as a unknown with the associated value (0).
      */
     @Test
-    public void identifyCoinUnknownValueTest() {
+    public void insertCoinUnknownValueTest() {
         Coin insertedCoin = new Coin(66, 12);
         assertEquals(0, insertedCoin.identify().value);
+    }
+
+    /**
+     * Test to check if bank nickel inventory increments by 1.
+     */
+    @Test
+    public void insertCoinNickelBankInventoryTest() {
+        Coin insertedCoin = new Coin(21, 5);
+
+        this.vendingMachine.bank.insertCoin(insertedCoin);
+        assertEquals(11, this.vendingMachine.bank.nickels);
     }
 
     /**

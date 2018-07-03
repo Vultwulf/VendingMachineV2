@@ -90,6 +90,10 @@ public class Bank {
         return returnedCoins;
     }
 
+    /**
+     *  Determine if it's possible to return coins for a given price.
+     * @return testPassed boolean value if change can be made.
+     */
     public boolean returnCoinTest(int testValue) {
         // Copy the actual values to test values.
         int testQuarters = this.quarters;
@@ -113,6 +117,7 @@ public class Bank {
                 testValue -= IdentifiedCoins.nickel.value;
                 testNickels -= 1;
             } else {
+                // If we get to a point where change can't be given, the test fails.
                 testPassed = false;
                 break;
             }
