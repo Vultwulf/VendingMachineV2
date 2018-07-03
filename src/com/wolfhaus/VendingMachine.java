@@ -23,7 +23,7 @@ public class VendingMachine {
     /**
      * The NumberFormat object.
      */
-    NumberFormat currency = NumberFormat.getCurrencyInstance();
+    final NumberFormat currency = NumberFormat.getCurrencyInstance();
 
     /**
      * The total currency inserted into in the vending machine.
@@ -97,7 +97,7 @@ public class VendingMachine {
 
         // Update the display buffer for the next display check.
         if(this.bank.activeValue == 0) {
-            if(this.isExactChangeOnly() == true) {
+            if(this.isExactChangeOnly()) {
                 // If there are no coins in the machine and exact change mode is on, display "EXACT CHANGE ONLY"
                 this.display = "EXACT CHANGE ONLY";
             } else {

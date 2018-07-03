@@ -213,7 +213,7 @@ public class VendingMachineTest {
         this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
 
         // Select product A1 (cola), expect a nickel returned
-        assertEquals(IdentifiedCoins.Name.NICKEL, this.vendingMachine.selectProduct("A1").get(0).value);
+        assertEquals(IdentifiedCoins.Name.NICKEL, this.vendingMachine.selectProduct("A1").get(0).name);
     }
 
     /**

@@ -8,17 +8,17 @@ public class Product {
     /**
      * The name of the button.
      */
-    protected String button;
+    protected final String button;
 
     /**
      * The name of a product.
      */
-    protected String name;
+    protected final String name;
 
     /**
      * The price of the product.
      */
-    protected int price;
+    protected final int price;
 
     /**
      * The inventory count of the product.

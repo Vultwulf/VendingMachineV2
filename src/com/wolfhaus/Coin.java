@@ -23,12 +23,12 @@ public class Coin {
     /**
      * The size of a coin in millimeters.
      */
-    protected int size;
+    protected final int size;
 
     /**
      * The weight of a coin in grams.
      */
-    protected int weight;
+    protected final int weight;
 
     /**
      * Constructor for VendingMachine.
@@ -58,9 +58,8 @@ public class Coin {
 
     /**
      * The method to identify a coin, and apply the name and value to the object.
-     * @return The identified coin object.
      */
-    private Coin identify() {
+    private void identify() {
         if (this.size == IdentifiedCoins.nickel.size && this.weight == IdentifiedCoins.nickel.weight) {
             // A nickel has been identified, apply the nickel name and value.
             this.name = IdentifiedCoins.nickel.name;
@@ -79,7 +78,5 @@ public class Coin {
             this.name = IdentifiedCoins.unknown.name;
             this.value = IdentifiedCoins.unknown.value;
         }
-
-        return this;
     }
 }

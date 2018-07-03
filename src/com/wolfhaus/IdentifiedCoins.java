@@ -32,20 +32,20 @@ public class IdentifiedCoins {
     /**
      *  Contains the attributes of a known nickel object.
      */
-    protected static Coin nickel = new Coin(Name.NICKEL, 5, 21, 5);
+    protected static final Coin nickel = new Coin(Name.NICKEL, 5, 21, 5);
 
     /**
      *  Contains the attributes of a known dime object.
      */
-    protected static Coin dime = new Coin(Name.DIME, 10, 18, 2);
+    protected static final Coin dime = new Coin(Name.DIME, 10, 18, 2);
 
     /**
      *  Contains the attributes of a known quarter object
      */
-    protected static Coin quarter = new Coin(Name.QUARTER, 25, 25, 6);
+    protected static final Coin quarter = new Coin(Name.QUARTER, 25, 25, 6);
 
     /**
      *  Contains the attributes of an unknown coin object
      */
-    protected static Coin unknown = new Coin(Name.UNKNOWN, 0, 0, 0);
+    protected static final Coin unknown = new Coin(Name.UNKNOWN, 0, 0, 0);
 }
