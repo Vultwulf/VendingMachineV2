@@ -87,6 +87,17 @@ public class VendingMachineTest {
     }
 
     /**
+     * Test to check if bank quarter inventory increments by 1.
+     */
+    @Test
+    public void insertCoinQuarterBankInventoryTest() {
+        Coin insertedCoin = new Coin(25, 6);
+
+        this.vendingMachine.bank.insertCoin(insertedCoin);
+        assertEquals(11, this.vendingMachine.bank.quarters);
+    }
+
+    /**
      * Test insertedCoinsValue after selecting product with
      * enough money, the display should be "THANK YOU".
      */
