@@ -25,6 +25,8 @@ public class VendingMachineTest {
     public void setUp() {
         // Instantiate the VendingMachine object
         this.vendingMachine = new VendingMachine();
+
+        // Set the initial state of the machine's coins.
         this.vendingMachine.bank.setBankCoins(10,10,10);
     }
 
@@ -197,8 +199,7 @@ public class VendingMachineTest {
     }
 
     /**
-     * Test insertedCoinsValue after selecting product with
-     * exact money, the value should be 0.
+     * Test selectProduct A1 with extra money, a nickel should be returned.
      */
     @Test
     public void selectColaWithExtraMoneyReturnCoinTest() {
@@ -211,8 +212,8 @@ public class VendingMachineTest {
         this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
         this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
 
-        // Select product A1 (cola)
-        assertEquals(IdentifiedCoins.Name.NICKEL, this.vendingMachine.selectProduct("A1").get(0).name);
+        // Select product A1 (cola), expect a nickel returned
+        assertEquals(IdentifiedCoins.Name.NICKEL, this.vendingMachine.selectProduct("A1").get(0).value);
     }
 
     /**
@@ -293,7 +294,7 @@ public class VendingMachineTest {
     /**
      * Test trying to purchase a Cola when the inventory for Cola is 0,
      * and there is enough money added in the machine, the display should read
-     * "SOLD OUT" on the first display check.
+     * "$1.00" on the second display check.
      */
     @Test
     public void selectColaSoldOutWithMoneyDisplayTest() {

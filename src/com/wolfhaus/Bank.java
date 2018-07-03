@@ -3,8 +3,7 @@ package com.wolfhaus;
 import java.util.ArrayList;
 
 /**
- * The IdentifiedCoins class will handle will handle all accepted coins
- * in the Vending Machine program.
+ * The Bank class will handle will handle all active and current money in the vending machine.
  */
 public class Bank {
 
