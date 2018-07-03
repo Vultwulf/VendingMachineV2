@@ -431,6 +431,18 @@ public class VendingMachineTest {
         assertEquals(10, this.vendingMachine.bank.nickels);
     }
 
+    /**
+     * Test to check if bank dime inventory reduces by 1.
+     */
+    @Test
+    public void returnCoinDimeBankInventoryTest() {
+        // Insert one nickel
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.dime);
+
+        this.vendingMachine.bank.returnCoins();
+        assertEquals(10, this.vendingMachine.bank.dimes);
+    }
+
     /** Test the display reads "EXACT CHANGE ONLY" when in Exact Change Only mode
      */
     @Test

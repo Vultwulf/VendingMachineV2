@@ -79,6 +79,7 @@ public class Bank {
             } else if(this.activeValue >= IdentifiedCoins.dime.value && this.dimes > 1) {
                 // Inserted coin value is above or equal 10, return a dime
                 activeValue -= IdentifiedCoins.dime.value;
+                this.dimes -= 1;
                 returnedCoins.add(IdentifiedCoins.dime);
             } else if(this.activeValue >= IdentifiedCoins.nickel.value && this.nickels > 1) {
                 // Inserted coin value is above or equal 5, return a nickel
