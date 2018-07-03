@@ -76,6 +76,17 @@ public class VendingMachineTest {
     }
 
     /**
+     * Test to check if bank dime inventory increments by 1.
+     */
+    @Test
+    public void insertCoinDimeBankInventoryTest() {
+        Coin insertedCoin = new Coin(18, 2);
+
+        this.vendingMachine.bank.insertCoin(insertedCoin);
+        assertEquals(11, this.vendingMachine.bank.dimes);
+    }
+
+    /**
      * Test insertedCoinsValue after selecting product with
      * enough money, the display should be "THANK YOU".
      */
