@@ -81,8 +81,9 @@ public class Bank {
                 activeValue -= IdentifiedCoins.dime.value;
                 returnedCoins.add(IdentifiedCoins.dime);
             } else if(this.activeValue >= IdentifiedCoins.nickel.value && this.nickels > 1) {
-                // Inserted coin value is above or equal 5, return a dime
+                // Inserted coin value is above or equal 5, return a nickel
                 activeValue -= IdentifiedCoins.nickel.value;
+                this.nickels -= 1;
                 returnedCoins.add(IdentifiedCoins.nickel);
             }
         }

@@ -419,6 +419,18 @@ public class VendingMachineTest {
         assertEquals(40, coinValue);
     }
 
+    /**
+     * Test to check if bank nickel inventory reduces by 1.
+     */
+    @Test
+    public void returnCoinNickelBankInventoryTest() {
+        // Insert one nickel
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.nickel);
+
+        this.vendingMachine.bank.returnCoins();
+        assertEquals(10, this.vendingMachine.bank.nickels);
+    }
+
     /** Test the display reads "EXACT CHANGE ONLY" when in Exact Change Only mode
      */
     @Test
