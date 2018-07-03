@@ -38,6 +38,8 @@ public class Coin {
     public Coin(int coinSize, int coinWeight) {
         this.size = coinSize;
         this.weight = coinWeight;
+
+        this.identify();
     }
 
     /**
@@ -58,7 +60,7 @@ public class Coin {
      * The method to identify a coin, and apply the name and value to the object.
      * @return The identified coin object.
      */
-    public Coin identify() {
+    private Coin identify() {
         if (this.size == IdentifiedCoins.nickel.size && this.weight == IdentifiedCoins.nickel.weight) {
             // A nickel has been identified, apply the nickel name and value.
             this.name = IdentifiedCoins.nickel.name;

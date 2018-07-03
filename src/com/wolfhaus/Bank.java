@@ -45,17 +45,17 @@ public class Bank {
      * @param coin Coin to be inserted.
      */
     public void insertCoin(Coin coin) {
-        // Identify the inserted coin
-        coin = coin.identify();
-
         switch (coin.name) {
-            case NICKEL: this.nickels++;
+            case NICKEL:
+                this.nickels++;
                 activeValue += IdentifiedCoins.nickel.value;
                 break;
-            case DIME: this.dimes++;
+            case DIME:
+                this.dimes++;
                 activeValue += IdentifiedCoins.dime.value;
                 break;
-            case QUARTER: this.quarters++;
+            case QUARTER:
+                this.quarters++;
                 activeValue += IdentifiedCoins.quarter.value;
                 break;
         }
@@ -74,18 +74,18 @@ public class Bank {
         {
             if(this.activeValue >= IdentifiedCoins.quarter.value && this.quarters > 1) {
                 // Inserted coin value is above or equal 25, return a quarter
-                this.quarters -= 1;
+                this.quarters--;
                 activeValue -= IdentifiedCoins.quarter.value;
                 returnedCoins.add(IdentifiedCoins.quarter);
             } else if(this.activeValue >= IdentifiedCoins.dime.value && this.dimes > 1) {
                 // Inserted coin value is above or equal 10, return a dime
+                this.dimes--;
                 activeValue -= IdentifiedCoins.dime.value;
-                this.dimes -= 1;
                 returnedCoins.add(IdentifiedCoins.dime);
             } else if(this.activeValue >= IdentifiedCoins.nickel.value && this.nickels > 1) {
                 // Inserted coin value is above or equal 5, return a nickel
+                this.nickels--;
                 activeValue -= IdentifiedCoins.nickel.value;
-                this.nickels -= 1;
                 returnedCoins.add(IdentifiedCoins.nickel);
             }
         }

@@ -34,7 +34,7 @@ public class VendingMachineTest {
     @Test
     public void insertCoinNickelValueTest() {
         Coin insertedCoin = new Coin(21, 5);
-        assertEquals(5, insertedCoin.identify().value);
+        assertEquals(5, insertedCoin.value);
     }
 
     /**
@@ -43,7 +43,7 @@ public class VendingMachineTest {
     @Test
     public void insertCoinDimeValueTest() {
         Coin insertedCoin = new Coin(18, 2);
-        assertEquals(10, insertedCoin.identify().value);
+        assertEquals(10, insertedCoin.value);
     }
 
     /**
@@ -52,7 +52,7 @@ public class VendingMachineTest {
     @Test
     public void insertCoinQuarterValueTest() {
         Coin insertedCoin = new Coin(25, 6);
-        assertEquals(25, insertedCoin.identify().value);
+        assertEquals(25, insertedCoin.value);
     }
 
     /**
@@ -61,7 +61,7 @@ public class VendingMachineTest {
     @Test
     public void insertCoinUnknownValueTest() {
         Coin insertedCoin = new Coin(66, 12);
-        assertEquals(0, insertedCoin.identify().value);
+        assertEquals(0, insertedCoin.value);
     }
 
     /**
