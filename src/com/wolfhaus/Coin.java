@@ -56,6 +56,7 @@ public class Coin {
 
     /**
      * The method to identify a coin, and apply the name and value to the object.
+     * @return The identified coin object.
      */
     public Coin identify() {
         if (this.size == IdentifiedCoins.nickel.size && this.weight == IdentifiedCoins.nickel.weight) {

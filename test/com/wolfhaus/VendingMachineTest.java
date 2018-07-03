@@ -70,10 +70,10 @@ public class VendingMachineTest {
     @Test
     public void selectColaWithEnoughMoneyThankYouTest() {
         // Insert four quarters
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
 
         // Select product A1 (cola)
         this.vendingMachine.selectProduct("A1");
@@ -89,10 +89,10 @@ public class VendingMachineTest {
     @Test
     public void afterSelectColaWithEnoughMoneyDisplayTest() {
         // Insert four quarters
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
 
         // Select product A1 (cola)
         this.vendingMachine.selectProduct("A1");
@@ -111,16 +111,16 @@ public class VendingMachineTest {
     @Test
     public void afterSelectColaWithEnoughMoneyValueTest() {
         // Insert four quarters
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
 
         // Select product A1 (cola)
         this.vendingMachine.selectProduct("A1");
 
         // Check the insertedCoinsValue which should be 0
-        assertEquals(0, this.vendingMachine.insertedCoinsValue);
+        assertEquals(0, this.vendingMachine.bank.activeValue);
     }
 
     /**
@@ -130,9 +130,9 @@ public class VendingMachineTest {
     @Test
     public void selectColaWithoutEnoughMoneyPriceTest() {
         // Insert three quarters
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
 
         // Select product A1 (cola)
         this.vendingMachine.selectProduct("A1");
@@ -148,9 +148,9 @@ public class VendingMachineTest {
     @Test
     public void afterSelectColaWithoutEnoughMoneyPriceTest() {
         // Insert four quarters
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
 
         // Select product A1 (cola)
         this.vendingMachine.selectProduct("A1");
@@ -169,13 +169,13 @@ public class VendingMachineTest {
     @Test
     public void selectColaWithExtraMoneyReturnCoinTest() {
         // Insert two nickels, two dimes, three quarters
-        this.vendingMachine.acceptCoin(IdentifiedCoins.nickel);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.nickel);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.dime);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.dime);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.nickel);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.nickel);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.dime);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.dime);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
 
         // Select product A1 (cola)
         assertEquals(IdentifiedCoins.Name.NICKEL, this.vendingMachine.selectProduct("A1").get(0).name);
@@ -189,10 +189,10 @@ public class VendingMachineTest {
     @Test
     public void selectColaSoldOutWithoutMoneyTest() {
         // Insert four quarters
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
 
         // Select product A1 (cola)
         this.vendingMachine.selectProduct("A1");
@@ -211,10 +211,10 @@ public class VendingMachineTest {
     @Test
     public void selectColaSoldOutWithoutMoneyInsertCoinTest() {
         // Insert four quarters
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
 
         // Select product A1 (cola)
         this.vendingMachine.selectProduct("A1");
@@ -236,19 +236,19 @@ public class VendingMachineTest {
     @Test
     public void selectColaSoldOutWithMoneyTest() {
         // Insert four quarters
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
 
         // Select product A1 (cola)
         this.vendingMachine.selectProduct("A1");
 
         // Insert four quarters
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
 
         // Select product A1 (cola) after it's been sold
         this.vendingMachine.selectProduct("A1");
@@ -264,19 +264,19 @@ public class VendingMachineTest {
     @Test
     public void selectColaSoldOutWithMoneyDisplayTest() {
         // Insert four quarters
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
 
         // Select product A1 (cola)
         this.vendingMachine.selectProduct("A1");
 
         // Insert four quarters
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
 
         // Select product A1 (cola) after it's been sold
         this.vendingMachine.selectProduct("A1");
@@ -292,10 +292,10 @@ public class VendingMachineTest {
     @Test
     public void returnCoinsSizeOneNickelTest() {
         // Insert one quarter
-        this.vendingMachine.acceptCoin(IdentifiedCoins.nickel);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.nickel);
 
         // Return Coins
-        assertEquals(1, this.vendingMachine.returnCoins().size());
+        assertEquals(1, this.vendingMachine.bank.returnCoins().size());
     }
 
     /** Test returnCoins size test after inserting one dime
@@ -303,10 +303,10 @@ public class VendingMachineTest {
     @Test
     public void returnCoinsSizeOneDimeTest() {
         // Insert one dime
-        this.vendingMachine.acceptCoin(IdentifiedCoins.dime);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.dime);
 
         // Return Coins
-        assertEquals(1, this.vendingMachine.returnCoins().size());
+        assertEquals(1, this.vendingMachine.bank.returnCoins().size());
     }
 
     /** Test returnCoins size test after inserting one quarter
@@ -314,10 +314,10 @@ public class VendingMachineTest {
     @Test
     public void returnCoinsSizeOneQuarterTest() {
         // Insert one quarter
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
 
         // Return Coins
-        assertEquals(1, this.vendingMachine.returnCoins().size());
+        assertEquals(1, this.vendingMachine.bank.returnCoins().size());
     }
 
     /** Test returnCoins size test after inserting one nickel, dime, quarter
@@ -325,12 +325,12 @@ public class VendingMachineTest {
     @Test
     public void returnCoinsSizeOneNickelDimeQuarterTest() {
         // Insert one nickel, dime, quarter
-        this.vendingMachine.acceptCoin(IdentifiedCoins.nickel);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.dime);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.nickel);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.dime);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
 
         // Return Coins
-        assertEquals(3, this.vendingMachine.returnCoins().size());
+        assertEquals(3, this.vendingMachine.bank.returnCoins().size());
     }
 
     /** Test returnCoins value test after inserting one nickel
@@ -338,10 +338,10 @@ public class VendingMachineTest {
     @Test
     public void returnCoinsValueOneNickelTest() {
         // Insert one quarter
-        this.vendingMachine.acceptCoin(IdentifiedCoins.nickel);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.nickel);
 
         // Return Coins
-        assertEquals(5, this.vendingMachine.returnCoins().get(0).value);
+        assertEquals(5, this.vendingMachine.bank.returnCoins().get(0).value);
     }
 
     /** Test returnCoins value test after inserting one nickel
@@ -349,10 +349,10 @@ public class VendingMachineTest {
     @Test
     public void returnCoinsValueOneDimeTest() {
         // Insert one quarter
-        this.vendingMachine.acceptCoin(IdentifiedCoins.dime);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.dime);
 
         // Return Coins
-        assertEquals(10, this.vendingMachine.returnCoins().get(0).value);
+        assertEquals(10, this.vendingMachine.bank.returnCoins().get(0).value);
     }
 
     /** Test returnCoins value test after inserting one quarter
@@ -360,10 +360,10 @@ public class VendingMachineTest {
     @Test
     public void returnCoinsValueOneQuarterTest() {
         // Insert one quarter
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
 
         // Return Coins
-        assertEquals(25, this.vendingMachine.returnCoins().get(0).value);
+        assertEquals(25, this.vendingMachine.bank.returnCoins().get(0).value);
     }
 
     /** Test returnCoins value test after inserting one nickel, dime, quarter
@@ -371,14 +371,14 @@ public class VendingMachineTest {
     @Test
     public void returnCoinsValueOneNickelDimeQuarterTest() {
         // Insert one nickel, dime, quarter
-        this.vendingMachine.acceptCoin(IdentifiedCoins.nickel);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.dime);
-        this.vendingMachine.acceptCoin(IdentifiedCoins.quarter);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.nickel);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.dime);
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
 
         int coinValue = 0;
 
         // Add together total coins value
-        for (Coin coin : this.vendingMachine.returnCoins()) {
+        for (Coin coin : this.vendingMachine.bank.returnCoins()) {
             coinValue += coin.value;
         }
 
@@ -389,9 +389,7 @@ public class VendingMachineTest {
      */
     @Test
     public void exactChangeTest() {
-        // Set the machine to Exact Change Only mode
-        this.vendingMachine.exactChangeOnly = true;
-
+        this.vendingMachine.bank.setBankCoins(0,0,0);
         assertEquals("EXACT CHANGE ONLY", this.vendingMachine.checkDisplay());
     }
 }

@@ -21,24 +21,19 @@ public class VendingMachine {
     protected ArrayList<Product> products = new ArrayList<>();
 
     /**
-     * The NumberFormat object
+     * The NumberFormat object.
      */
     NumberFormat currency = NumberFormat.getCurrencyInstance();
 
     /**
-     * The total value of currency inserted into in the vending machine.
+     * The total currency inserted into in the vending machine.
      */
-    protected int insertedCoinsValue = 0;
+    protected Bank bank = new Bank();
 
     /**
      * The current display text on the vending machine.
      */
     protected String display;
-
-    /**
-     * The current display text on the vending machine.
-     */
-    protected boolean exactChangeOnly = false;
 
     /**
      * Constructor for VendingMachine.
@@ -48,15 +43,8 @@ public class VendingMachine {
         this.products.add(new Product("cola", 100, "A1", 1));
         this.products.add(new Product("chips", 50, "A2", 1));
         this.products.add(new Product("candy", 65, "A3", 1));
-    }
 
-    /**
-     * Method to accept a coin.
-     * @param coin to be accepted into the vending machine.
-     */
-    public void acceptCoin(Coin coin){
-        Coin identifiedCoin = coin.identify();
-        insertedCoinsValue += identifiedCoin.value;
+        this.bank.setBankCoins(10, 10, 10);
     }
 
     /**
@@ -73,7 +61,7 @@ public class VendingMachine {
 
         if(selectedProduct != null && selectedProduct.count > 0) {
             // Determine if this product can be purchased
-            if (this.insertedCoinsValue >= selectedProduct.price) {
+            if (this.bank.activeValue >= selectedProduct.price) {
                 // There is at least enough money in the machine to purchase the selected product
                 this.display = "THANK YOU";
 
@@ -81,11 +69,11 @@ public class VendingMachine {
                 selectedProduct.dispense();
 
                 // Subtract used coins from the insertedCoinsValue
-                this.insertedCoinsValue -= selectedProduct.price;
+                this.bank.activeValue -= selectedProduct.price;
 
                 // If there is any extra money, return it to the user
-                if (this.insertedCoinsValue > 0) {
-                    returnedCoins = this.returnCoins();
+                if (this.bank.activeValue > 0) {
+                    returnedCoins = this.bank.returnCoins();
                 }
             } else {
                 // There is not enough money in the machine for the selected product
@@ -108,8 +96,8 @@ public class VendingMachine {
         String display = this.display;
 
         // Update the display buffer for the next display check.
-        if(this.insertedCoinsValue == 0) {
-            if(this.exactChangeOnly == true) {
+        if(this.bank.activeValue == 0) {
+            if(this.isExactChangeOnly() == true) {
                 // If there are no coins in the machine and exact change mode is on, display "EXACT CHANGE ONLY"
                 this.display = "EXACT CHANGE ONLY";
             } else {
@@ -118,12 +106,11 @@ public class VendingMachine {
             }
         } else {
             // Display should read current value of inserted coins
-            this.display = currency.format((double)this.insertedCoinsValue/100);
+            this.display = currency.format((double)this.bank.activeValue/100);
         }
 
         // If the returning display is in a null state, apply the most current display
-        if(display == null)
-        {
+        if(display == null) {
             display = this.display;
         }
 
@@ -131,31 +118,19 @@ public class VendingMachine {
     }
 
     /**
-     * Method to return coins to the user.
-     * @return ArrayList of Coin to be returned to the user.
+     * Method to determine if exact change is required.
+     * @return boolean value if exact change is required.
      */
-    public ArrayList<Coin> returnCoins(){
-        // Coins to return
-        ArrayList<Coin> returnedCoins = new ArrayList<>();
+    public boolean isExactChangeOnly() {
+        boolean isExactChangeOnly = false;
 
-        // Determine what coins will be returned
-        while(this.insertedCoinsValue > 0)
-        {
-            if(this.insertedCoinsValue >= IdentifiedCoins.quarter.value) {
-                // Inserted coin value is above or equal 25, return a quarter
-                returnedCoins.add(IdentifiedCoins.quarter);
-                this.insertedCoinsValue -= IdentifiedCoins.quarter.value;
-            } else if(this.insertedCoinsValue >= IdentifiedCoins.dime.value) {
-                // Inserted coin value is above or equal 10, return a dime
-                returnedCoins.add(IdentifiedCoins.dime);
-                this.insertedCoinsValue -= IdentifiedCoins.dime.value;
-            } else if(this.insertedCoinsValue >= IdentifiedCoins.nickel.value) {
-                // Inserted coin value is above or equal 5, return a dime
-                returnedCoins.add(IdentifiedCoins.nickel);
-                this.insertedCoinsValue -= IdentifiedCoins.nickel.value;
+        // If product is available, check to see if the vending machine can make change.
+        for (Product product: products) {
+            if(product.count > 0 && !bank.returnCoinTest(product.price)) {
+                isExactChangeOnly = true;
             }
         }
 
-        return returnedCoins;
+        return isExactChangeOnly;
     }
 }
