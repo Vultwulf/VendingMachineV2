@@ -74,6 +74,7 @@ public class Bank {
         {
             if(this.activeValue >= IdentifiedCoins.quarter.value && this.quarters > 1) {
                 // Inserted coin value is above or equal 25, return a quarter
+                this.quarters -= 1;
                 activeValue -= IdentifiedCoins.quarter.value;
                 returnedCoins.add(IdentifiedCoins.quarter);
             } else if(this.activeValue >= IdentifiedCoins.dime.value && this.dimes > 1) {

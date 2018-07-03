@@ -443,6 +443,18 @@ public class VendingMachineTest {
         assertEquals(10, this.vendingMachine.bank.dimes);
     }
 
+    /**
+     * Test to check if bank quarter inventory reduces by 1.
+     */
+    @Test
+    public void returnCoinQuarterBankInventoryTest() {
+        // Insert one nickel
+        this.vendingMachine.bank.insertCoin(IdentifiedCoins.quarter);
+
+        this.vendingMachine.bank.returnCoins();
+        assertEquals(10, this.vendingMachine.bank.quarters);
+    }
+
     /** Test the display reads "EXACT CHANGE ONLY" when in Exact Change Only mode
      */
     @Test
